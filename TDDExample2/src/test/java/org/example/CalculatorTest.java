@@ -1,8 +1,18 @@
+/*
+  B211202069 SEYMA HANDEKLI
+  SWE 202 SOFTWARE VERIFICATION AND VALIDATION
+  HOMEWORK 1
+  PARAMETERIZED TEST
+
+*/
 package org.example;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,29 +26,16 @@ class CalculatorTest {
     void tearDown() {
     }
 
-    @Test
-    void testDivision1() {
-        assertEquals(5, Calculator.divide(10, 2));
-    }
-
-    @Test
-    void testDivision2() {
-        assertEquals(2.5, Calculator.divide(10, 4));
-    }
-
-    @Test
-    void testDivision3() {
-        assertEquals(5, Calculator.divide(12.5f, 2.5f));
-    }
-
-    @Test
-    void testDivision4() {
-        assertEquals(4, Calculator.divide(10, 2.5f));
-    }
-
-    @Test
-    void testDivision5() {
-        assertEquals(2.5f, Calculator.divide(12.5f, 5));
+    @ParameterizedTest
+    @CsvSource({
+            "10, 2, 5",
+            "10, 4, 2.5",
+            "12.5, 2.5, 5",
+            "10, 2.5, 4",
+            "12.5, 5, 2.5"
+    })
+    void testDivision(float numerator, float denominator, float expectedResult) {
+        assertEquals(expectedResult, Calculator.divide(numerator, denominator));
     }
 
     @Test
